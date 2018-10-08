@@ -3,12 +3,12 @@
 ## Поиграться можно тут 
 [project/public/index.html](https://ilya777grin23.github.io/snake-game/public)
 ## Для управления
-На клавишах:
+### На клавишах:
 * W, ArrowUp - вверх.
 * L, ArrowLeft -  влево.
 * S, ArrowDown - вниз.
 * R, ArrowRight -  вправо.
-На сенсоре или мышке:
+### На сенсоре или мышке:
 * Слайд вверх - вверх.
 * Слайд влево - влево.
 * Слайд вниз - вниз.
