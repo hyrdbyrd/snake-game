@@ -1,7 +1,7 @@
 # Snake-game
 Игра написана на javascript, с использованием canvas.
 ## Поиграться можно тут 
-[project/public/index.html](https://ilya777grin23.github.io/snake-game/public)
+[project/dist/index.html](https://ilya777grin23.github.io/snake-game/dist)
 ## Для управления
 ### На клавишах:
 * W, ArrowUp - вверх.
