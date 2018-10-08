@@ -1,7 +1,7 @@
 # Snake-game
 Игра написана на javascript, с использованием canvas.
 ## Поиграться можно тут 
-[project/public/index.html](https://ilya777grin23.github.io/snake-game/)
+[project/public/index.html](https://ilya777grin23.github.io/snake-game/public)
 ## Зачем сервер?
 Для того чтобы можно было по локальному ip, поиграться :)
 ## Сущности
