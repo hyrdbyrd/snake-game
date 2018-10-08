@@ -147,7 +147,7 @@ class SnakeGame {
             ctx.fillStyle = '#000';
             ctx.strokeStyle = '#fff';
 
-            const score = `Score: ${this.snake.pos.length * 100}`;
+            const score = `Score: ${(this.snake.pos.length - 3) * 100}`;
 
             const fontSize = m.fr.width / score.length * 20;
             ctx.font = `bold ${fontSize}px Arial`;
