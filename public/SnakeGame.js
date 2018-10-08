@@ -194,11 +194,9 @@ class SnakeGame {
 
         function onMove(event) {
             const { movementX: mX, movementY: mY } = event;
-            const minmax = 5;
+            const minmax = 0;
             const newTime = (new Date()).getTime();
             
-            console.log(mX, mY);
-
             // 0.5s
             const delay = 200;
 
