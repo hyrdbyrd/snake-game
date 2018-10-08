@@ -30,7 +30,7 @@ class SnakeGame {
             moveAhead(matrix, appleGen) {
                 let { pos } = this;
                 // ms
-                if (this.diff >= 40) {
+                if (this.diff >= Math.atan(pos.length) * 90 / Math.PI) {
                     const { x, y } = this.dirs;
 
                     const lastElem = pos[pos.length - 1];
@@ -122,32 +122,105 @@ class SnakeGame {
     }
 
     eventsInit() {
+        const self = this;
+
+        const moveTo = {
+            left() {
+                self.snake.diff = 1000;
+                if (self.snake.dirs.x === 1) return;
+                self.snake.dirs = { x: -1, y: 0 };
+            },
+            top() {
+                self.snake.diff = 1000;
+                if (self.snake.dirs.y === 1) return;
+                self.snake.dirs = { x: 0, y: -1 };
+            },
+            down() {
+                self.snake.diff = 1000;
+                if (self.snake.dirs.y === -1) return;
+                self.snake.dirs = { x: 0, y: 1 };
+            },
+            right() {
+                self.snake.diff = 1000;
+                if (self.snake.dirs.x === -1) return;
+                self.snake.dirs = { x: 1, y: 0 };
+            }
+        };
+
         document.addEventListener('keydown', event => {
             event.preventDefault();
             // Set direction for snake, on key...
-            switch (event.key) {
-                case 'ArrowUp':
-                this.snake.diff = 1000;
-                if (this.snake.dirs.y === 1) return;
-                this.snake.dirs = { x: 0, y: -1 };
-                    break;
-                case 'ArrowDown':
-                this.snake.diff = 1000;
-                if (this.snake.dirs.y === -1) return;
-                this.snake.dirs = { x: 0, y: 1 };
-                    break;
-                case 'ArrowLeft':
-                this.snake.diff = 1000;
-                    if (this.snake.dirs.x === 1) return;
-                    this.snake.dirs = { x: -1, y: 0 };
-                    break;
-                case 'ArrowRight':
-                    this.snake.diff = 1000;
-                    if (this.snake.dirs.x === -1) return;
-                    this.snake.dirs = { x: 1, y: 0 };
-                    break;
+            switch (event.keyCode) {
+            // ArrowUp
+            case 38:
+                moveTo.top();
+                break;
+            // W - key
+            case 87:
+                moveTo.top();
+                break;
+            // ArrowDown
+            case 40:
+                moveTo.down();
+                break;
+            // S - key
+            case 83:
+                moveTo.down();
+                break;
+            // ArrowLeft
+            case 37:
+                moveTo.left();
+                break;
+            case 65:
+                moveTo.left();
+                break;
+            // ArrowRight
+            case 39:
+                moveTo.right();
+                break;
+            case 68:
+                moveTo.right();
+                break;
             }
         });
+
+        if (!PointerEvent) return;
+        
+        function onDown() {
+            self.eventTime = 0;
+            document.addEventListener('pointermove', onMove);
+            document.addEventListener('pointerup', onUp);
+        }
+
+        function onMove(event) {
+            const { movementX: mX, movementY: mY } = event;
+            const minmax = 20;
+            const newTime = (new Date()).getTime();
+            
+            // 0.5s
+            const delay = 500;
+
+            if (!(self.eventTime + delay <= newTime)) return;
+
+            self.eventTime = newTime;
+
+            if (mX < -minmax) {
+                moveTo.left();
+            } else if (mX > minmax) {
+                moveTo.right();
+            } else if (mY > minmax) {
+                moveTo.down();
+            } else if (mY < -minmax) {
+                moveTo.top();
+            }
+        }
+
+        function onUp() {
+            document.removeEventListener('pointermove', onMove);
+            document.removeEventListener('pointerup', onUp);
+        }
+
+        this.canv.addEventListener('pointerdown', onDown);
     }
 
     showScore() {
