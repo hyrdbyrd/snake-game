@@ -11,16 +11,26 @@
             margin: 0;
         }
 
-        .snake-game
+        body,
+        .main
         {
-            width: 100vw;
-            height: 100vh;    
+            min-height: 100vh;
+            height: 100vh;
+        }
+
+        .main
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
     <script src="SnakeGame.js"></script>
 </head>
 <body>
-    <canvas class="snake-game"></canvas>
+    <div class="main">
+        <canvas width="600" height="600" class="snake-game"></canvas>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>
